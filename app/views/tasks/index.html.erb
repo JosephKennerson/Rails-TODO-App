@@ -1,0 +1,28 @@
+<h1>Task View</h1>
+
+<%= form_for :task, url:tasks_path do |f| %>
+<p>
+  <%= f.label :name %><br>
+  <%=f.text_field :name %>
+</p>
+<p>
+  <%=f.submit %>
+</p>
+<% end %>
+
+<h3> All Tasks </h3>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= task.name %> <br>
+
+      <%= form_for :task, url:task_path(task), method:"put" do |f| %>
+        <%= check_box_tag(:is_completed, 'yes', task.is_completed) %>
+        <%= submit_tag("Update") %>
+      <% end %>
+    </li>
+  <%end%>
+</ul>
+
+<a href="task_path(task)">View Completed Tasks</a>
